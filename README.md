@@ -1,6 +1,6 @@
 # QueueMind ⏱️
 
-**Know your queue before it gets long.** [Open the academic demo](https://queuemind-nitr.streamlit.app/) · [CI](https://github.com/yasharth25/queuemind/actions/workflows/ci.yml)
+**Know your queue before it gets long.** [Open the academic demo](https://queuemind-nitr.streamlit.app/) · [CI](https://github.com/strawhataryan/queuemind/actions/workflows/ci.yml)
 
 QueueMind is an academic prototype for queue counting, demand forecasting, deterministic wait simulation, and counter recommendations. It is **not** a live NIT Rourkela CCTV deployment. The public app's normal mode uses clearly labelled **SYNTHETIC demo data**. It must not be interpreted as measured campus operations.
 
