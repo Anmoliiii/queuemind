@@ -4,6 +4,14 @@
 
 QueueMind is an academic prototype for queue counting, demand forecasting, deterministic wait simulation, and counter recommendations. It is **not** a live NIT Rourkela CCTV deployment. The public app's normal mode uses clearly labelled **SYNTHETIC demo data**. It must not be interpreted as measured campus operations.
 
+- [Use the website](#use-the-website)
+- [Analyze a video locally](#analyze-a-video-locally)
+- [Public video inference status](#public-video-inference-status)
+- [Architecture and methodology](#architecture-and-methodology)
+- [Privacy](#privacy)
+- [Installation, tests, and evaluation](#installation-tests-and-evaluation)
+- [Current limitations](#current-limitations)
+
 ## Use the website
 
 Run `streamlit run app.py`. The six tabs are **Home**, **Upload Video**, **Live Demo**, **Predictions**, **Best Counters**, and **Results**. Home has the same video uploader and analysis state as Upload Video. Live Demo runs without a camera, weights, or trained forecast model. Change the crowd, facility, counters, or simulation speed to see deterministic changes. Predictions and Best Counters use simulator outputs, not static example values.
@@ -24,7 +32,11 @@ Open **Home** or **Upload Video**, upload an authorized MP4/MOV/AVI/MKV recordin
 
 Person detection, anonymous IoU tracking, queue-area counting, and virtual-line crossings are real inference, not drawn examples. A bottom-centre ground point must be inside the selected polygon to count as waiting. A service-line crossing is **not** a verified completed transaction. Recalibrate the queue area and rerun if the camera view differs from the default.
 
-After analysis, the latest frame's queue count and crossing totals are video-derived. Future arrivals require enough observed entry crossings or an **explicitly selected SYNTHETIC demand assumption**. The latter is labelled “Video count + synthetic demo demand.” The selected facility's service time is an example configuration, not a measured video service speed. The deterministic simulator then projects +5/+10/+20/+30-minute queue and wait and optimizes counters. This is not claimed to be an ML forecast from one short clip. Video state is shared across tabs; **Back to Demo** restores the independent synthetic simulation.
+After analysis, the latest frame's queue count and crossing totals are video-derived.
+
+Future arrivals require enough observed entry crossings or an **explicitly selected SYNTHETIC demand assumption**. The latter is labelled “Video count + synthetic demo demand.” The selected facility's service time is an example configuration, not a measured video service speed.
+
+The deterministic simulator then projects +5/+10/+20/+30-minute queue and wait and optimizes counters. This is not claimed to be an ML forecast from one short clip. Video state is shared across tabs; **Back to Demo** restores the independent synthetic simulation.
 
 ### Public video inference status
 
@@ -59,7 +71,15 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-Additional commands: `python -m scripts.generate_synthetic_data --days 60`, `python -m scripts.initialize_database`, and `python -m scripts.evaluate_vision --labels "C:\path\to\vision_labels.csv"`. Do not commit generated datasets, test videos, model weights, `.env`, or secrets.
+Additional commands:
+
+| Task | Command |
+| --- | --- |
+| Generate 60 days of synthetic data | `python -m scripts.generate_synthetic_data --days 60` |
+| Initialize the database | `python -m scripts.initialize_database` |
+| Evaluate manually labelled video frames | `python -m scripts.evaluate_vision --labels "C:\path\to\vision_labels.csv"` |
+
+Do not commit generated datasets, test videos, model weights, `.env`, or secrets.
 
 ## Current limitations
 
