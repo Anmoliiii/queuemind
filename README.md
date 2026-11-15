@@ -64,3 +64,16 @@ Additional commands: `python -m scripts.generate_synthetic_data --days 60`, `pyt
 ## Current limitations
 
 The public app cannot analyze videos until a private worker is hosted and configured; that external setup has not been performed. Real-person footage, crowded scenes, camera calibration, local webcam behavior, mobile-device upload, and public-cloud end-to-end analysis still need permitted hardware/footage verification. The tracker uses IoU, so occlusion and frame skipping can lose IDs or crossings. Short videos rarely establish a reliable future arrival rate. The ML evaluation uses only synthetic data; forecasting on real campus demand remains unvalidated.
+
+
+## macOS and Linux setup
+
+For cloud-safe simulation, install the dependencies, run the tests, and start the app:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m streamlit run app.py
+```
